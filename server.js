@@ -3,27 +3,24 @@
 const Hapi = require('hapi');
 
 // Create a server with a host and port
-const server = new Hapi.Server();
-server.connection({
-    host: 'https://blooming-woodland-87797.herokuapp.com',
-    port: (+process.env.PORT, '3000')
-});
-
+var server = new Hapi.Server();
+server.connection({ port: 4000, labels: ['api'] });
+var apiServer = server.select('api');
 // Add the route
-server.route({
+apiServer.route({
     method: 'GET',
     path:'/hello',
     handler: function (request, reply) {
-
+      
         return reply('hello world');
     }
 });
 
 // Start the server
-server.start((err) => {
+apiServer.start((err) => {
 
     if (err) {
         throw err;
     }
-    console.log('Server running at:', server.info.uri);
+    console.log('Server running at:', apiServer.info.uri);
 });
