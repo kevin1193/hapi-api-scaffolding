@@ -5,7 +5,7 @@ const Hapi = require('hapi');
 // Create a server with a host and port
 const server = new Hapi.Server();
 server.connection({
-    host: 'localhost',
+    host: 'https://blooming-woodland-87797.herokuapp.com',
     port: 8080
 });
 
